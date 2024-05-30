@@ -213,7 +213,6 @@ account default
 auth on
 tls on
 tls_starttls off
-tls_certcheck off
 syslog off
 # 日志保存路径
 logfile /rsync/logs/msmtp.log
