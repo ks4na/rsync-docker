@@ -145,7 +145,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
     volumes:
-      - $PWD/rsync:/rsync
+      - ./rsync:/rsync
       - /path_to_save_backup:/bak_opizero3 # /path_to_save_backup 为宿主机上存放备份数据的路径
     ports:
       - 873:873
@@ -251,7 +251,7 @@ services:
       - MAIL_ONLY_FAILED=true # 为 true 时仅在同步失败后发送邮件，不指定或为其他值则每次同步后都发送邮件通知
       - HOSTNAME=opizero3 # 邮件标题中显示的备份主机名称
     volumes:
-      - $PWD/rsync:/rsync
+      - ./rsync:/rsync
       - /path_to_backup:/bak_src/path_to_backup # /path_to_backup 为待备份的数据，挂载到 /bak_src 目录下的某个目录，可以指定挂载多个待备份数据到 /bak_src 目录下
 EOF
 ```
