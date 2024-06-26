@@ -107,7 +107,7 @@ lock file = /var/run/rsyncd.lock
 comment = backup opizero3
 path = /bak_opizero3
 ignore errors = yes
-# hosts allow = 10.10.10.*
+# s allow = 10.10.10.*
 auth users = bak_opizero3_user
 secrets file = /rsync/secrets/bak_opizero3.secrets
 log file = /rsync/logs/bak_opizero3.log
@@ -217,7 +217,7 @@ syslog off
 # 日志保存路径
 logfile /rsync/logs/msmtp.log
 
-host smtp.qq.com
+ smtp.qq.com
 port 465
 # 发送者的邮箱
 from example@qq.com
@@ -240,7 +240,7 @@ services:
     container_name: rsync-cron
     init: true # 加上该项，否则容器无法处理 SIGTERM 信号，要等待 10 s 才能停止
     restart: unless-stopped
-    network_mode: host # 由于在容器中运行，最好指定 host 模式，这样可以访问到宿主机所在内网的机器
+    network_mode: bridge
     environment:
       - TZ=Asia/Shanghai
       - RSYNC_CRONTAB=crontab.txt
