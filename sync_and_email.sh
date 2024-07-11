@@ -22,6 +22,12 @@ rsync $RSYNC_OPTIONS "$SYNC_SRC" "$SYNC_DEST" >> $LOG_FILE 2>&1
 
 RSYNC_EXIT_CODE=$?
 
+# 检查 rsync 的退出码，如果是 24 则忽略错误
+# https://unix.stackexchange.com/questions/86879/suppress-rsync-warning-some-files-vanished-before-they-could-be-transferred
+if [ $RSYNC_EXIT_CODE -eq 24 ]; then
+    RSYNC_EXIT_CODE=0
+fi
+
 DONE_DATE=$(date +"%Y-%m-%d_%H-%M")
 
 # 打印同步结果，判断同步成功时是否需要发送邮件通知
@@ -62,7 +68,7 @@ LINE_COUNT=$(wc -l < "$LOG_FILE")
 if [ "$LINE_COUNT" -gt 50 ]; then
     HEAD=$(head -n 10 "$LOG_FILE")
     TAIL=$(tail -n 40 "$LOG_FILE")
-    BODY="$HEAD\n...\n$TAIL"
+    BODY="$HEAD\n\n\n......\n\n\n$TAIL"
 else
     BODY=$(cat "$LOG_FILE")
 fi
