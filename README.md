@@ -293,5 +293,6 @@ rsync 常用参数：
 - `-z`
 - `-v`
 - `--delete`
+- `--exclude-from=FILE`
 
 rsync 参数及作用参考 [rysnc manpage](https://download.samba.org/pub/rsync/rsync.1#OPTION_SUMMARY)
